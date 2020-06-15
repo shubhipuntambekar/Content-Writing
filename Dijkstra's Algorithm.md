@@ -58,7 +58,6 @@ import java.io.*;
 
 class Dijkstras {
 	static final int V = 6;
-	
 	int minDistance(int dist[], Boolean sPath[]){
 		int min = Integer.MAX_VALUE;
 		int min_index = -1;
