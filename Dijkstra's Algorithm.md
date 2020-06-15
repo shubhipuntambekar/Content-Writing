@@ -52,9 +52,11 @@ Connected Weighted Graph G = (V,E)<br>
 <li>This algorithm may or may not work on negative weighted graphs.</li>
 </ol>
 <h4 id="code">Code</h4>
-<pre><code>import java.util.*;
+<pre><code>
+import java.util.*;
 import java.lang.*;
 import java.io.*;
+
 
 class Dijkstras {
 
@@ -79,14 +81,14 @@ class Dijkstras {
 		}
 	}
 
-	void dijkstra(int graph[][], int src){
+	void dijkstra(int graph[][], int source){
 		int dist[] = new int[V];
 		Boolean sPath = new Boolean[V];
 		for(int i = 0; i &lt; V; i++){
 			dist[i] = Integer.MAX_VALUE;
 			sPath[i] = false;
 		}
-		dist[src] = 0;
+		dist[source] = 0;
 		for(int count = 0; count &lt; V - 1; count++){
 			int u = minDistance(dist,sPath);
 			sPath[u] = true;
@@ -99,6 +101,8 @@ class Dijkstras {
 		print(dist);
 	}
 }
+
+
 </code></pre>
 <h4 id="time-complexity--ov2">Time Complexity : O(V^2)</h4>
 <p>The time complexity of this problem can be improved by using an adjacency list instead of adjacency matrix. The Adjacency list implementation can be done using a Priority Queue (Min), and a time complexity of O(E log V) can be achieved using this.</p>
