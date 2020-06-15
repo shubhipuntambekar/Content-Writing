@@ -101,16 +101,14 @@ class Dijkstras {
 		print(dist);
 	}
 }
-
-
-
-
-#### Time Complexity : O(V^2)
-The time complexity of this problem can be improved by using an adjacency list instead of adjacency matrix. The Adjacency list implementation can be done using a Priority Queue (Min), and a time complexity of O(E log V) can be achieved using this.
-#### Applications
-1. Finding shortest path
-2. Finding directions for a location in a map
-3. Used in social networking applications
-4. Used in a telephone network/routing network
 </code></pre>
+<h4 id="time-complexity--ov2">Time Complexity : O(V^2)</h4>
+<p>The time complexity of this problem can be improved by using an adjacency list instead of adjacency matrix. The Adjacency list implementation can be done using a Priority Queue (Min), and a time complexity of O(E log V) can be achieved using this.</p>
+<h4 id="applications">Applications</h4>
+<ol>
+<li>Finding shortest path</li>
+<li>Finding directions for a location in a map</li>
+<li>Used in social networking applications</li>
+<li>Used in a telephone network/routing network</li>
+</ol>
 
