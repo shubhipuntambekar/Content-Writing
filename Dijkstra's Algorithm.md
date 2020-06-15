@@ -11,7 +11,7 @@
 Connected Weighted Graph G = (V,E)<br>
 <strong>Step 1:</strong> Initially create an empty set (<em>sPath</em>) to keep track of all the vertices that are included in the shortest path tree.<br>
 <strong>Step 2:</strong> Assign a distance value to all the vertices. Initialize all vertices distance to infinity, except for the source vertex. Set the distance value for source vertex to 0 so that it is picked first.<br>
-<strong>Step 3:</strong> Repeat the below while the set (<em>sPath</em>) doesn’t contain all the vertices.<br>
+<strong>Step 3:</strong> Repeat step 4 and step 5 while the set (<em>sPath</em>) doesn’t contain all the vertices.<br>
 <strong>Step 4:</strong> Pick a vertex <em>u</em> having minimum distance which is not present in the set <em>sPath</em> and include it into <em>sPath</em>.<br>
 <strong>Step 5:</strong> Update distance values for all the adjacent vertices of picked vertex <em>u</em>. For every adjacent vertex <em>v</em>, if the sum of distance value of <em>u</em> (from source) and weight of edge (u,v) is less than distance value of <em>u</em>, then update the adjacent vertex <em>u</em>’s distance.</p>
 <h4 id="example">Example</h4>
@@ -25,7 +25,7 @@ Connected Weighted Graph G = (V,E)<br>
 <img src="https://i.ibb.co/xmWN4np/IMG-20200614-134130.jpg" alt="Initializing distance values for all vertices"></p>
 </li>
 <li>
-<p>Go to each adjacent vertex and update its distance accordingly. Here (0+2), and (0+4).<br>
+<p>Go to each adjacent vertex and update its distance accordingly. Here minimum distance vertex = 0 and adjacent nodes are updated to (0+2), and (0+4).<br>
 <img src="https://i.ibb.co/sWCYyhf/IMG-20200614-134115.jpg" alt="enter image description here"></p>
 </li>
 <li>
@@ -52,61 +52,68 @@ Connected Weighted Graph G = (V,E)<br>
 <li>This algorithm may or may not work on negative weighted graphs.</li>
 </ol>
 <h4 id="code">Code</h4>
-<pre><code>import java.util.*;
-import java.lang.*;
-import java.io.*;
-
-class Dijkstras {
-	static final int V = 5;
-	
-	int minDistance( int dist[], Boolean sPath[]){
-		int min = Integer.MAX_VALUE;
-		int min_index = -1;
-		for(int v = 0; v &lt; V; v++)
-			if(sPath[v] == false &amp;&amp; dist[v] &lt;= min){
-				min = dist[v];
-				min_index = v;
-			}
-		return min_index;
-	}
-	
-	void printSolution(int dist[]){
-		System.out.println("Vertex \t\t Distance from Source");
-		for(int i = 0; i &lt; V; i++){
-			System.out.println(i +" \t\t "+ dist[i]);
-	}
-	
-	void dijkstra(int graph[][],int src){
-		int dist[] = new int[V];
-		Boolean sPath[] = new Boolean[V];
-		for(int i = 0; i &lt; V; i++) {
-			dist[i] = Integer.MAX_VALUE;
-			spPath[i] = false;
-		}
-		dist[src] = 0;
-		for(int count = 0; count &lt; V - 1; count++) {
-			int u = minDistance(dist, sPath);
-			sPath[u] = true;
-			for(int v = 0; v &lt; V; v++)
-				if(!sPath[v] &amp;&amp; graph[u][v] != 0 &amp;&amp; dist[u] != Integer.MAX_VALUE &amp;&amp; dist[u] + graph[u][v] &lt; dist[v]){
-					dist[v] = dist[u] + graph[u][v];
-			}
-		}
-		printSolution(dist);
-	}
-
-	public static void main(String[] args){
-		int graph[][] = new int[][] {
-						{0,2,4,0,0,0},
+<pre><code>import java.util.*; 
+import java.lang.*; 
+import java.io.*; 
+  
+class Dijkstras { 
+    static final int V = 6; 
+    int minDistance(int dist[], Boolean sPath[]) 
+    { 
+        int min = Integer.MAX_VALUE;
+        int min_index = -1; 
+  
+        for (int v = 0; v &lt; V; v++) 
+            if (sPath[v] == false &amp;&amp; dist[v] &lt;= min) { 
+                min = dist[v]; 
+                min_index = v; 
+            } 
+  
+        return min_index; 
+    } 
+  
+    void printSolution(int dist[]) 
+    { 
+        System.out.println("Vertex \t\t Distance from Source"); 
+        for (int i = 0; i &lt; V; i++) 
+            System.out.println(i + " \t\t " + dist[i]); 
+    } 
+  
+    void dijkstra(int graph[][], int src) 
+    { 
+        int dist[] = new int[V]; 
+        Boolean sPath[] = new Boolean[V]; 
+  
+        for (int i = 0; i &lt; V; i++) { 
+            dist[i] = Integer.MAX_VALUE; 
+            sPath[i] = false; 
+        } 
+  
+        dist[src] = 0; 
+  
+        for (int count = 0; count &lt; V - 1; count++) { 
+            int u = minDistance(dist, sPath); 
+			sPath[u] = true; 
+  
+            for (int v = 0; v &lt; V; v++) 
+			    if (!sPath[v] &amp;&amp; graph[u][v] != 0 &amp;&amp; dist[u] != Integer.MAX_VALUE &amp;&amp; dist[u] + graph[u][v] &lt; dist[v]) 
+                    dist[v] = dist[u] + graph[u][v]; 
+        } 
+  
+        printSolution(dist); 
+    } 
+  
+    public static void main(String[] args) 
+    { 
+        int graph[][] = new int[][] { {0,2,4,0,0,0},
 						{0,0,1,7,0,0},
 						{0,0,0,0,3,0},
 						{0,0,0,0,0,1},
 						{0,0,0,2,0,5},
-						{0,0,0,0,0,0},
-						};
-		Dijkstras d = new Dijkstras();
-		d.dijkstra(graph, 0);
-	}
+						{0,0,0,0,0,0}, }; 
+        Dijkstras d = new Dijkstras(); 
+        d.dijkstra(graph, 0); 
+    } 
 }
 </code></pre>
 <h4 id="time-complexity--ov2">Time Complexity : O(V^2)</h4>
