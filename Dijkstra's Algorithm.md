@@ -52,13 +52,11 @@ Connected Weighted Graph G = (V,E)<br>
 <li>This algorithm may or may not work on negative weighted graphs.</li>
 </ol>
 <h4 id="code">Code</h4>
-<pre><code>
-import java.util.*;
+<pre><code>import java.util.*;
 import java.lang.*;
 import java.io.*;
 
-
-class Dijkstras {
+class Dijkstras{
 
 	static final int V = 6;
 	
