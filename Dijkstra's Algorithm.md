@@ -52,6 +52,53 @@ Connected Weighted Graph G = (V,E)<br>
 <li>This algorithm may or may not work on negative weighted graphs.</li>
 </ol>
 <h4 id="code">Code</h4>
+<pre><code>import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Dijkstras {
+	static final int V = 6;
+	
+	int minDistance(int dist[], Boolean sPath[]){
+		int min = Integer.MAX_VALUE;
+		int min_index = -1;
+		for(int v = 0; v &lt; V; v++){
+			if(sPath[v] == false &amp;&amp; dist[v] &lt;= min){
+				min = dist[v];
+				min_index = v;
+			}
+		}
+		return min_index;
+	}
+	
+	void print(int dist[]){
+		System.out.println("Vertex \t|\t Distance from Source");
+		for(int i = 0; i &lt; V; i++){
+			System.out.println(i + " \t|\t " + dist[i]);
+		}
+	}
+
+	void dijkstra(int graph[][], int src){
+		int dist[] = new int[V];
+		Boolean sPath = new Boolean[V];
+		for(int i = 0; i &lt; V; i++){
+			dist[i] = Integer.MAX_VALUE;
+			sPath[i] = false;
+		}
+		dist[src] = 0;
+		for(int count = 0; count &lt; V - 1; count++){
+			int u = minDistance(dist,sPath);
+			sPath[u] = true;
+			for(int v = 0; v &lt; V; v++){
+				if(!sPath[v] &amp;&amp; graph[u][v] != 0 &amp;&amp; dist[u] != Integer.MAX_VALUE &amp;&amp; dist[u] = dist[u] + graph[u][v]){
+					dist[v] = dist[u] + graph[u][v];
+				}
+			}
+		}
+		print(dist);
+	}
+}
+</code></pre>
 <h4 id="time-complexity--ov2">Time Complexity : O(V^2)</h4>
 <p>The time complexity of this problem can be improved by using an adjacency list instead of adjacency matrix. The Adjacency list implementation can be done using a Priority Queue (Min), and a time complexity of O(E log V) can be achieved using this.</p>
 <h4 id="applications">Applications</h4>
